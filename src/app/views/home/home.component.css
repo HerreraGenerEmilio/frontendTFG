@@ -1,0 +1,22 @@
+.jumbotron {
+    width: 100%;
+    height: 50vh;
+    padding: 0;
+    margin: 0;
+}
+
+.jumbotron img {
+    width: 100%;
+    height: auto;
+}
+
+.feedCard {
+    width: 30vh;
+    height: 30vh;
+    padding: 0;
+    margin: 0;
+}
+
+main.container-fluid {
+    margin-bottom: 60px; /* Adjust the margin to create space for the footer */
+}

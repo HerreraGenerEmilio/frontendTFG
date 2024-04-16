@@ -1,0 +1,21 @@
+<main class="container-fluid">
+    <div class="row">
+        <div class="py-5 g-0">
+            <div class="jumbotron"> <img src="../../../assets/imgs/landing/hi52.jpg" alt="Silhouette of mountains">
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        @for (feedItem of feedItems ; track feedItem) {
+        <div class="col-md-3">
+            <div class="card feedCard">
+                <img src="../../../assets/imgs/landing/hi52.jpg" alt="Silhouette of mountains">
+                <div class="card-header">
+                    <h5 class="card-title">Card Title</h5>
+                    <p class="card-subtitle">Card Subtitle</p>
+                </div>
+            </div>
+        </div>
+        }
+    </div>
+</main>
