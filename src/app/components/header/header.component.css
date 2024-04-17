@@ -1,0 +1,13 @@
+.custom-navbar {
+    background-color: rgb(1, 8, 1) /* Código hexadecimal, RGB, o nombre de color */
+  }
+
+.mainLogo {
+    width: auto;
+    height: 10vh;
+}
+
+.headerTextContainer{
+    background-color: rgb(1, 8, 1);
+    color: white;
+}

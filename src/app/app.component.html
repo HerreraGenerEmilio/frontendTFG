@@ -1,9 +1,18 @@
-<div class="row">
-<app-header></app-header>
-</div>
-<div class="row">
-  <router-outlet></router-outlet>
-</div>
-<div class="row">
-  <app-footer></app-footer>
+<div class="container-fluid g-0"  style="padding: 0px; margin-bottom: 0px;">
+  <div class="row">
+    <div class="col-12 headerContainer">
+      <app-header></app-header>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12 gx-0" style="padding: 0px;">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-12">
+      <app-footer></app-footer>
+    </div>
+  </div>
 </div>

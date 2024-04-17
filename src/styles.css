@@ -1,0 +1,17 @@
+body{
+   /*  por si aca que me estaba haciendo cosas raras */
+   width: 100%;
+   font-family: 'nunito', sans-serif;
+}
+
+main{
+    width: 100%;
+    /* background-color: #e6e6e6; */
+    /* background-color: #8ae68a; */
+    /* background-color: #b3e6cc; este quizá es too much pero estaba chulo */
+    background-color: #f0f5f1;
+}
+
+.headerContainer{
+    background-color: rgb(1, 8, 1);
+}

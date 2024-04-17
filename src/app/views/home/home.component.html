@@ -1,21 +1,27 @@
-<main class="container-fluid">
-    <div class="row">
-        <div class="py-5 g-0">
-            <div class="jumbotron"> <img src="../../../assets/imgs/landing/hi52.jpg" alt="Silhouette of mountains">
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        @for (feedItem of feedItems ; track feedItem) {
-        <div class="col-md-3">
-            <div class="card feedCard">
-                <img src="../../../assets/imgs/landing/hi52.jpg" alt="Silhouette of mountains">
-                <div class="card-header">
-                    <h5 class="card-title">Card Title</h5>
-                    <p class="card-subtitle">Card Subtitle</p>
+<main>
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class=" g-0">
+                <div class="jumbotron"> <img src="../../../assets/imgs/landing/hi52.jpg" alt="Silhouette of mountains">
                 </div>
             </div>
-        </div>
-        }
+        </div>    
     </div>
+
+    <div class="container">
+        <div class="row justify-content-center align-items-center">
+            @for (feedItem of feedItems ; track feedItem) {
+            <div class="col-md-3 col-sm-6 d-flex justify-content-center align-items-center gy-3">
+                <div class="card cardFeed" >
+                    <img class="card-img-top" src="../../../assets/imgs/landing/meeting.jpg" alt="Card image cap">
+                    <div class="card-body">
+                      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                    </div>
+                  </div>
+            </div>
+            }
+        </div>
+    </div>
+   
 </main>
