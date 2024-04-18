@@ -10,18 +10,28 @@
     </div>
 
     <div class="container">
-        <div class="row justify-content-center align-items-center">
-            @for (feedItem of feedItems ; track feedItem) {
-            <div class="col-md-3 col-sm-6 d-flex justify-content-center align-items-center gy-3">
-                <div class="card cardFeed" >
-                    <img class="card-img-top" src="../../../assets/imgs/landing/meeting.jpg" alt="Card image cap">
-                    <div class="card-body">
-                      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    </div>
-                  </div>
+        
+        @if (feedItems.length > 0) {
+            <div class="row justify-content-center align-items-center">
+                @for (feedItem of feedItems ; track feedItem) {
+                <div class="col-md-3 col-sm-6 d-flex justify-content-center align-items-center gy-3">
+                    <div class="card border rounded cardFeed" >
+                        <img class="card-img-top" src="../../../assets/imgs/landing/meeting.jpg" alt="Card image cap">
+                        <div class="card-body">
+                          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                        </div>
+                      </div>
+                </div>
+                }
             </div>
-            }
-        </div>
+            <div class="pagination">
+                <button (click)="previousPage()" [disabled]="currentPage === 1">Anterior</button>
+                <span>Página {{ currentPage }} de {{ totalPages }}</span>
+                <button (click)="nextPage()" [disabled]="currentPage === totalPages">Siguiente</button>
+                <button (click)="test()">test</button>
+            </div>
+        } @else {
+         <p>No hay resultados</p>
+        } 
     </div>
-   
 </main>

@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { DatabaseService } from '../../services/database.service';
+import { HttpClientModule } from '@angular/common/http';
 
 @Component({
   selector: 'app-home',
@@ -9,7 +11,7 @@ import { Component } from '@angular/core';
 })
 export class HomeComponent {
   
-  constructor() { }
+  constructor(private obtainDataService: DatabaseService) { }
 
   feedItems: any[] =[
     {
@@ -93,7 +95,49 @@ export class HomeComponent {
       "url": "../../../assets/imgs/landing/hi52.jpg"
     }
   ]
+
+  public currentPage = 1;
+  public pageSize = 10;
+  public totalPages = 1;
   
   ngOnInit() { }
 
+  async fetchUsterst(page: number, limit: number): Promise<void> {
+    try {
+      const response: any | undefined = await this.obtainDataService.recibirDatosUsers(this.currentPage, this.pageSize).toPromise();
+      if (response !== undefined) {
+        console.log('Respuesta del servidor:', response);
+       /*  this.users = response.users;
+        this.totalPages = response.lastPage; */
+      } else {
+        console.log('No hay respuesta');
+      }
+    } catch (error) {
+      console.error('Error al recibir los datos:', error);
+    }
+  }
+
+  onPageChange(page: number): void {
+    this.currentPage = page;
+    alert(this.currentPage);
+    this.fetchUsterst(this.currentPage, this.pageSize);
+  }
+
+  previousPage(): void {
+    if (this.currentPage > 1) {
+      this.currentPage--;
+      this.onPageChange(this.currentPage);
+    }
+  }
+
+  nextPage(): void {
+    if (this.currentPage < this.totalPages) {
+      this.currentPage++;
+      this.onPageChange(this.currentPage);
+    }
+  }
+
+  test(): void {
+    this.fetchUsterst(this.currentPage, this.pageSize);
+  }
 }
