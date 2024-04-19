@@ -16,7 +16,9 @@ export class DatabaseService {
     const params = new HttpParams()
       .set('page', page.toString())
       .set('pageSize', pageSize.toString());
+      const url = this.apiUrl + '/test';
+      console.log('url:', url);
    /*  return this.http.get('http://localhost:8000/viewUsers', { params }); */
-   return this.http.get(this.apiUrl, { params });
+   return this.http.get(url, { params });
   }
 }
