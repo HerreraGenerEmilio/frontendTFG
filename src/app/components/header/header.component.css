@@ -11,3 +11,8 @@
     background-color: rgb(1, 8, 1);
     color: white;
 }
+
+.italicText {
+    font-style: italic;
+    font-weight: bold;
+  }

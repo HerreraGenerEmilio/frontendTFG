@@ -102,13 +102,15 @@ export class HomeComponent {
   
   ngOnInit() { }
 
-  async fetchUsterst(page: number, limit: number): Promise<void> {
+  async fetchOfertas(page: number, limit: number): Promise<void> {
     try {
-      const response: any | undefined = await this.obtainDataService.recibirDatosUsers(this.currentPage, this.pageSize).toPromise();
+      const response: any | undefined = await this.obtainDataService.recibirDatosOfertas(this.currentPage, this.pageSize).toPromise();
       if (response !== undefined) {
         console.log('Respuesta del servidor:', response);
        /*  this.users = response.users;
         this.totalPages = response.lastPage; */
+        this.feedItems=response;
+        console.log('feedItems:', this.feedItems);
       } else {
         console.log('No hay respuesta');
       }
@@ -120,7 +122,7 @@ export class HomeComponent {
   onPageChange(page: number): void {
     this.currentPage = page;
     alert(this.currentPage);
-    this.fetchUsterst(this.currentPage, this.pageSize);
+    this.fetchOfertas(this.currentPage, this.pageSize);
   }
 
   previousPage(): void {
@@ -138,6 +140,7 @@ export class HomeComponent {
   }
 
   test(): void {
-    this.fetchUsterst(this.currentPage, this.pageSize);
+    this.fetchOfertas(this.currentPage, this.pageSize);
+    
   }
 }
