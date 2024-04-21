@@ -99,8 +99,12 @@ export class HomeComponent {
   public currentPage = 1;
   public pageSize = 10;
   public totalPages = 1;
+  public authenticated = false;
   
-  ngOnInit() { }
+  async ngOnInit() { 
+   await this.check();
+    this.test();
+  }
 
   async fetchOfertas(page: number, limit: number): Promise<void> {
     try {
@@ -141,6 +145,25 @@ export class HomeComponent {
 
   test(): void {
     this.fetchOfertas(this.currentPage, this.pageSize);
-    
   }
+
+  async check(): Promise<void> {
+    try {
+      const response: any | undefined = await this.obtainDataService.checkAuthStatus().toPromise();
+      if (response !== undefined) {
+        console.log('Respuesta del servidor:', response.authenticated);
+        this.authenticated = response.authenticated;
+        if (this.authenticated == false) {
+          //window.location.href='http://localhost:8000/login'
+        }
+      } else {
+        console.log('No hay respuesta');
+        //window.location.href='http://localhost:8000/login'
+      }
+    } catch (error) {
+      console.error('Error al recibir los datos:', error);
+      //window.location.href='http://localhost:8000/login'
+    }
+  }
+    
 }
