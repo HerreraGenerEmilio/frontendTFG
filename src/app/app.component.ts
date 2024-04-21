@@ -10,7 +10,7 @@ import { DatabaseService } from './services/database.service';
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, RouterOutlet, HeaderComponent, FooterComponent, HttpClientModule,],
+  imports: [CommonModule, RouterOutlet, HeaderComponent, FooterComponent, HttpClientModule],
   providers: [DatabaseService],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
