@@ -1,44 +1,45 @@
 <main>
-    
+
 
     <div class="container-fluid">
         <div class="row">
             <div class="col-12 headerTextContainer">
                 <div class="container headerTextContainer" style="padding: 0;">
-                    <h2>No <i class="italicText">busques</i> trabajo... <br> <i class="italicText">encuentra</i> tu pasión con Jobhub!</h2>
-                  </div>
+                    <h2>No <i class="italicText">busques</i> trabajo... <br> <i class="italicText">encuentra</i> tu
+                        pasión con Jobhub!</h2>
+                </div>
             </div>
             <div class=" g-0">
                 <div class="jumbotron"> <img src="../../../assets/imgs/landing/hi52.jpg" alt="Silhouette of mountains">
                 </div>
             </div>
-        </div>    
+        </div>
     </div>
 
     <div class="container">
-        
+
         @if (feedItems.length > 0) {
-            <div class="row justify-content-center align-items-center">
-                @for (feedItem of feedItems ; track feedItem) {
-                <div class="col-md-3 col-sm-6 d-flex justify-content-center align-items-center gy-3">
-                    <div class="card border rounded cardFeed" >
-                        <img class="card-img-top" src={{feedItems[$index].imagen}} alt="Card image cap">
-                        <div class="card-body">
-                            <p class="card-title">{{feedItems[$index].nombre}}</p>
-                          <p class="card-text">{{feedItems[$index].descripcion}}</p>
-                        </div>
-                      </div>
+        <div class="row justify-content-center align-items-stretch">
+            @for (feedItem of feedItems ; track feedItem) {
+            <div class="col-md-3 col-sm-6 d-flex justify-content-center align-items-center gy-3 test">
+                <div class="card h-100 border rounded  feedCard bg-light">
+                    <img class="card-img-top" src={{feedItems[$index].imagen}} alt="Card image cap">
+                    <div class="card-body cpad">
+                        <h5 class="card-title">{{feedItems[$index].nombre}}</h5>
+                        <p class="card-text">{{feedItems[$index].descripcion}}</p>
+                    </div>
                 </div>
-                }
             </div>
-            <div class="pagination">
-                <button (click)="previousPage()" [disabled]="currentPage === 1">Anterior</button>
-                <span>Página {{ currentPage }} de {{ totalPages }}</span>
-                <button (click)="nextPage()" [disabled]="currentPage === totalPages">Siguiente</button>
-                <button (click)="test()">test</button>
-            </div>
+            }
+        </div>
+        <div class="pagination">
+            <button (click)="previousPage()" [disabled]="currentPage === 1">Anterior</button>
+            <span>Página {{ currentPage }} de {{ totalPages }}</span>
+            <button (click)="nextPage()" [disabled]="currentPage === totalPages">Siguiente</button>
+            <button (click)="test()">test</button>
+        </div>
         } @else {
-         <p>No hay resultados</p>
-        } 
+        <p>No hay resultados</p>
+        }
     </div>
 </main>
