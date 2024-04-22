@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpErrorResponse, HttpHeaders, HttpParams, HttpClientModule  } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders, HttpParams, HttpClientModule } from '@angular/common/http';
 import { Observable, catchError, tap, throwError } from 'rxjs';
 
 @Injectable({
@@ -21,14 +21,17 @@ export class DatabaseService {
     return this.http.get(url, { params });
   }
 
-  checkAuthStatus(): Observable<any> {
+  async checkAuthStatus(): Promise<boolean> {
 
-    const params = new HttpParams()
-    const url = this.apiUrl + '/check-auth-status';
-    console.log('url:', url);
-    /*  return this.http.get('http://localhost:8000/viewUsers', { params }); */
-    return this.http.get(url, { params });
+    try {
+      // Realizar una solicitud HTTP al backend para verificar el estado de autenticación del usuario
+      const response: any = await this.http.get('/api/auth/check').toPromise();
+      console.log('Respuesta del servidor:', response);
+      return response.authenticated === true;
+    } catch (error) {
+      console.error('Error al verificar la autenticación:', error);
+      return false;
+    }
   }
-  
 
 }

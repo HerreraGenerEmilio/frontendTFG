@@ -149,11 +149,12 @@ export class HomeComponent {
 
   async check(): Promise<void> {
     try {
-      const response: any | undefined = await this.obtainDataService.checkAuthStatus().toPromise();
+      const response: any | undefined = await this.obtainDataService.checkAuthStatus();
       if (response !== undefined) {
         console.log('Respuesta del servidor:', response.authenticated);
         this.authenticated = response.authenticated;
         if (this.authenticated == false) {
+          console.log('Authenticated:', this.authenticated);
           //window.location.href='http://localhost:8000/login'
         }
       } else {

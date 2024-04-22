@@ -7,6 +7,7 @@ import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { DatabaseService } from './services/database.service';
 
 
+
 @Component({
   selector: 'app-root',
   standalone: true,
