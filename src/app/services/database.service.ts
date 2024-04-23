@@ -22,12 +22,11 @@ export class DatabaseService {
   }
 
   async checkAuthStatus(): Promise<boolean> {
-
     try {
       // Realizar una solicitud HTTP al backend para verificar el estado de autenticación del usuario
-      const response: any = await this.http.get('/api/auth/check').toPromise();
+      const response: any = await this.http.get<{ authenticated: boolean }>(`${this.apiUrl}/api/check-auth-status`,{ withCredentials: true }).toPromise();
       console.log('Respuesta del servidor:', response);
-      return response.authenticated === true;
+      return response.authenticated;
     } catch (error) {
       console.error('Error al verificar la autenticación:', error);
       return false;

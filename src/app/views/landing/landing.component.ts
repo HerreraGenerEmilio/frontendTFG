@@ -1,17 +1,17 @@
 import { Component } from '@angular/core';
 import { DatabaseService } from '../../services/database.service';
 import { HttpClientModule } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-home',
+  selector: 'app-landing',
   standalone: true,
   imports: [],
-  templateUrl: './home.component.html',
-  styleUrl: './home.component.css'
+  templateUrl: './landing.component.html',
+  styleUrl: './landing.component.css'
 })
-export class HomeComponent {
-  
-  constructor(private obtainDataService: DatabaseService) { }
+export class LandingComponent {
+  constructor(private obtainDataService: DatabaseService, private router: Router) { }
 
   feedItems: any[] =[
     {
@@ -101,10 +101,14 @@ export class HomeComponent {
   public totalPages = 1;
   public authenticated = false;
   
-  async ngOnInit() { 
-    this.test();
-    console.log('respuesta servidor', this.obtainDataService.checkAuthStatus());
-  }
+    async ngOnInit() { 
+      this.test();
+      let logged = await this.obtainDataService.checkAuthStatus()
+      console.log('respuesta servidor', logged);
+      if (logged == true) {
+        this.router.navigate(['/home']);
+      }
+    }
 
   async fetchOfertas(page: number, limit: number): Promise<void> {
     try {
@@ -147,6 +151,4 @@ export class HomeComponent {
     this.fetchOfertas(this.currentPage, this.pageSize);
   }
 
-
-    
 }

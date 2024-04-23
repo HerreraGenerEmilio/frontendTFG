@@ -3,6 +3,7 @@ import { HomeComponent } from './views/home/home.component';
 import { TestViewComponent } from './views/test-view/test-view.component';
 import { AuthGuard } from './auth.guard';
 import { HttpClientModule } from '@angular/common/http';
+import { LandingComponent } from './views/landing/landing.component';
 
 export const routes: Routes = [
  /*  {
@@ -15,11 +16,11 @@ export const routes: Routes = [
     pathMatch: 'full',
   }, */
 
-  { path: '', redirectTo: 'home', pathMatch: 'full' },
+  { path: '', redirectTo: 'landing', pathMatch: 'full' },
   { path: 'home', pathMatch: 'full', component: HomeComponent, canActivate: [AuthGuard]},
   { path: 'test', redirectTo: 'test', pathMatch: 'full' },
   { path: 'home', component: HomeComponent},
-  { path: 'test', component: TestViewComponent}
+  { path: 'landing', component: LandingComponent}
 ];
 
 /* export const routes: Routes = [
