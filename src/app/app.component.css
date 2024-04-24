@@ -1,3 +1,7 @@
 router-outlet{
     padding: 0 !important;
 }
+
+.mb-0{
+    background-color: #f0f5f1 !important
+}
