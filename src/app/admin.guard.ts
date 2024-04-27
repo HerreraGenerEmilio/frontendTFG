@@ -6,8 +6,8 @@ import { DatabaseService } from './services/database.service';
 @Injectable({
   providedIn: 'root'
 })
-export class AuthGuard implements CanActivate {
 
+export class AdminGuard implements CanActivate {
   constructor(private obtainDataService: DatabaseService, private router: Router) { }
 
   async canActivate(): Promise<boolean> {
@@ -20,9 +20,10 @@ export class AuthGuard implements CanActivate {
         console.log('Usuario autenticado:', response);
         if (response.isAdmin) {
           console.log('daleee');
-          this.router.navigate(['/test']);
+          return true;
         }
-        return true; // El usuario está autenticado, permite la navegación
+        this.router.navigate(['/home'])
+        return false; // El usuario está autenticado, permite la navegación
       } else {
         console.log('Usuario no autenticado:', response);
         //window.location.href = 'http://localhost:8000/login';
@@ -34,5 +35,4 @@ export class AuthGuard implements CanActivate {
       return false;
     }
   }
-
-}
+};

@@ -4,6 +4,7 @@ import { TestViewComponent } from './views/test-view/test-view.component';
 import { AuthGuard } from './auth.guard';
 import { HttpClientModule } from '@angular/common/http';
 import { LandingComponent } from './views/landing/landing.component';
+import { AdminGuard } from './admin.guard';
 
 export const routes: Routes = [
  /*  {
@@ -18,9 +19,10 @@ export const routes: Routes = [
 
   { path: '', redirectTo: 'landing', pathMatch: 'full' },
   { path: 'home', pathMatch: 'full', component: HomeComponent, canActivate: [AuthGuard]},
-  { path: 'test', redirectTo: 'test', pathMatch: 'full' },
+  { path: 'test', pathMatch: 'full', component: TestViewComponent, canActivate: [AdminGuard]},
   { path: 'home', component: HomeComponent},
-  { path: 'landing', component: LandingComponent}
+  { path: 'landing', component: LandingComponent},
+  { path: 'test', component: TestViewComponent}
 ];
 
 /* export const routes: Routes = [

@@ -5,8 +5,8 @@
         <div class="row">
             <div class="col-12 headerTextContainer">
                 <div class="container headerTextContainer" style="padding: 0;">
-                    <h2>No <i class="italicText">busques</i> trabajo... <br> <i class="italicText">encuentra</i> tu
-                        pasión con Jobhub!</h2>
+                    <h2>Da de alta tu empresa para que miles de usuarios puedan ver tus ofertas de empleo en su feed!
+                    </h2>
                 </div>
             </div>
             <div class=" g-0">
@@ -19,11 +19,13 @@
     <div class="container">
 
         @if (feedItems.length > 0) {
-        <div class="row justify-content-center align-items-stretch">
-            @for (feedItem of feedItems ; track feedItem) {
+        <div class="row  align-items-stretch">
+            @for (feedItem of feedItems; let even = $even; let odd = $odd; track feedItem) {
             <div class="col-lg-3 col-md-6 col-sm-6 d-flex justify-content-center align-items-center gy-3 test">
-                <div class="card h-100 border rounded align-items-stretch feedCard  bg-light" style="object-fit: contain;">
-                    <img class="card-img img-fluid w-100" src="{{feedItems[$index].imagen}}" alt="Card image cap" style="object-fit: contain;">
+                <div class="card h-100 border rounded align-items-stretch feedCard  bg-light"
+                    style="object-fit: contain;">
+                    <img class="card-img img-fluid w-100" src="{{feedItems[$index].imagen}}" alt="Card image cap"
+                        style="object-fit: contain;">
                     <div class="card-body cpad">
                         <h5 class="card-title">{{feedItems[$index].nombre}}</h5>
                         <p class="card-text">{{feedItems[$index].descripcion}}</p>
@@ -37,10 +39,38 @@
             <span>Página {{ currentPage }} de {{ totalPages }}</span>
             <button (click)="nextPage()" [disabled]="currentPage === totalPages">Siguiente</button>
             <button (click)="test()">test</button>
-            
+
         </div>
         } @else {
         <p>No hay resultados</p>
         }
+    </div>
+
+    <div class="container-fluid headerTextContainer">
+        <div class="row">
+            <div class="col-12 headerTextContainer">
+                <div class="container headerTextContainer" style="padding: 0;">
+                    <h2>No <i class="italicText">busques</i> candidatos... <br> <i class="italicText">encuentra</i> tu
+                        empleado ideal con Jobhub!</h2>
+                </div>
+            </div>
+            @for (sector of landinImgs; let even = $even; let odd = $odd; track sector) {
+            @if (odd) {
+            <div class="col-6 d-flex justify-content-start">
+                <img class="sector" src="{{sector}}" alt="">
+            </div>
+            <div class="col-6 d-flex align-items-center">
+                <h5>{{landingTexts[$index]}}</h5>
+            </div>
+            } @else {
+                <div class="col-6 d-flex align-items-center">
+                    <h5>{{landingTexts[$index]}}</h5>
+                </div>
+                <div class="col-6 d-flex justify-content-end">
+                    <img class="sector" src="{{sector}}" alt="">
+                </div>
+            }
+            }
+        </div>
     </div>
 </main>

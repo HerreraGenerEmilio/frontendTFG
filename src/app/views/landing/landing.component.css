@@ -37,4 +37,7 @@ main.container-fluid {
 .card-title{
     font-weight: bold !important;
 }
-
+    
+.sector{
+    width: 20vh;
+}
