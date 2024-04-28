@@ -64,7 +64,6 @@ export class LandingComponent {
 
   onPageChange(page: number): void {
     this.currentPage = page;
-    alert(this.currentPage);
     this.fetchOfertas(this.currentPage, this.pageSize);
   }
 

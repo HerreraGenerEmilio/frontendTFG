@@ -35,15 +35,26 @@
             }
         </div>
         <div class="pagination">
-            <button (click)="previousPage()" [disabled]="currentPage === 1">Anterior</button>
+            <button class="btn-31" (click)="previousPage()" [disabled]="currentPage === 1">
+                <span class="text-container">
+                    <span class="text">Anterior</span>
+                </span>
+            </button>
+            
             <span>Página {{ currentPage }} de {{ totalPages }}</span>
-            <button (click)="nextPage()" [disabled]="currentPage === totalPages">Siguiente</button>
-            <button (click)="test()">test</button>
+            
+            <button class="btn-31" (click)="nextPage()" [disabled]="currentPage === totalPages">
+                <span class="text-container">
+                    <span class="text">Siguiente</span>
+                </span>
+            </button>
+            <!-- <button (click)="test()">test</button> -->
 
         </div>
         } @else {
         <p>No hay resultados</p>
         }
+        <br>
     </div>
 
     <div class="container-fluid headerTextContainer">
@@ -63,12 +74,12 @@
                 <h5>{{landingTexts[$index]}}</h5>
             </div>
             } @else {
-                <div class="col-6 d-flex align-items-center">
-                    <h5>{{landingTexts[$index]}}</h5>
-                </div>
-                <div class="col-6 d-flex justify-content-end">
-                    <img class="sector" src="{{sector}}" alt="">
-                </div>
+            <div class="col-6 d-flex align-items-center">
+                <h5>{{landingTexts[$index]}}</h5>
+            </div>
+            <div class="col-6 d-flex justify-content-end">
+                <img class="sector" src="{{sector}}" alt="">
+            </div>
             }
             }
         </div>

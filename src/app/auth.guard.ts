@@ -25,12 +25,12 @@ export class AuthGuard implements CanActivate {
         return true; // El usuario está autenticado, permite la navegación
       } else {
         console.log('Usuario no autenticado:', response);
-        //window.location.href = 'http://localhost:8000/login';
+        window.location.href = 'http://localhost:8000/login';
         return false;
       }
     } catch (error) {
       console.error('Error al verificar la autenticación:', error);
-      //window.location.href = 'http://localhost:8000/login';
+      window.location.href = 'http://localhost:8000/login';
       return false;
     }
   }

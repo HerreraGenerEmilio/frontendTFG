@@ -101,9 +101,10 @@ export class HomeComponent {
   public totalPages = 1;
   public authenticated = false;
   
-  async ngOnInit() { 
+  async ngOnInit() {
     this.test();
-    console.log('respuesta servidor', this.obtainDataService.checkAuthStatus());
+    let logged = await this.obtainDataService.checkAuthStatus()
+    console.log('respuesta servidor', logged);
   }
 
   async fetchOfertas(page: number, limit: number): Promise<void> {
@@ -111,9 +112,10 @@ export class HomeComponent {
       const response: any | undefined = await this.obtainDataService.recibirDatosOfertas(this.currentPage, this.pageSize).toPromise();
       if (response !== undefined) {
         console.log('Respuesta ofertas:', response);
-       /*  this.users = response.users;
-        this.totalPages = response.lastPage; */
-        this.feedItems=response;
+        /*  this.users = response.users;
+         this.totalPages = response.lastPage; */
+        this.feedItems = response.data;
+        this.totalPages = response.last_page;
         console.log('feedItems:', this.feedItems);
       } else {
         console.log('No hay respuesta');
@@ -125,7 +127,6 @@ export class HomeComponent {
 
   onPageChange(page: number): void {
     this.currentPage = page;
-    alert(this.currentPage);
     this.fetchOfertas(this.currentPage, this.pageSize);
   }
 
@@ -146,7 +147,6 @@ export class HomeComponent {
   test(): void {
     this.fetchOfertas(this.currentPage, this.pageSize);
   }
-
 
     
 }

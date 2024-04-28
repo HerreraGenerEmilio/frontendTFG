@@ -1,3 +1,51 @@
 footer{
     background-color: rgb(1, 8, 1);
 }
+
+li a:hover {
+    color: #18E71E !important;
+}
+
+a{
+    text-decoration: none;
+}
+button {
+    --glow-color: #18E71E; /* Verde */
+    --glow-spread-color: rgba(155, 229, 155, 0.5); /* Un tono de verde más claro */
+    --enhanced-glow-color: rgb(231, 206, 255); /* Puedes dejarlo igual */
+    --btn-color: rgb(1, 81, 1); /* Ajustado a rgb(1, 81, 1) */
+    --btn-glow-opacity: 0.2; /* Opacidad del brillo */
+    --btn-glow-blur: 0.1em; /* Radio de difuminado del brillo */
+    --btn-glow-height: 0.05em; /* Altura del brillo */
+    border: .25em solid var(--glow-color);
+    padding: 1em 3em;
+    color: var(--glow-color);
+    font-size: 15px;
+    font-weight: bold;
+    background-color: var(--btn-color);
+    border-radius: 1em;
+    outline: none;
+    box-shadow: 
+        0 0 1em .25em var(--glow-color),
+        0 0 2em 1em var(--glow-spread-color),
+        inset 0 0 .25em .1em var(--glow-color); /* Reducir el resplandor interno */
+    text-shadow: 0 0 .5em var(--glow-color);
+    position: relative;
+    transition: all 0.3s;
+}
+
+button:hover {
+    color: var(--btn-color);
+    background-color: var(--glow-color);
+    box-shadow: 
+        0 0 .5em .25em var(--glow-color),
+        0 0 1em .5em var(--glow-spread-color),
+        inset 0 0 .25em .1em var(--glow-color); /* Reducir el resplandor interno */
+}
+
+button:active {
+    box-shadow: 
+        0 0 .3em .25em var(--glow-color),
+        0 0 .8em .5em var(--glow-spread-color),
+        inset 0 0 .2em .1em var(--glow-color); /* Reducir el resplandor interno */
+}
