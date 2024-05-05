@@ -1,28 +1,92 @@
 <main>
 
-    <div class="container-fluid" style="background-color:white;">
+    <div class="container-fluid">
         <div class="row">
-            <div class="col-12 col-md-6 py-5 d-flex justify-content-center" style="background-color: lightgrey;">
-                <div class="card">
-                    <div class="card-header">
-                        Featured
-                    </div>
-                    <div class="card-body">
-                        <h5 class="card-title">Special title treatment</h5>
-                        <p class="card-text">With supporting text below as a natural lead-in to additional content.
-                        </p>
-                        <button class="btn btn-primary mx-1">A</button>
-                        <button class="btn btn-primary mx-1">A</button>
-                        <button class="btn btn-primary mx-1">A</button>
-                    </div>
+            <div class="col-12 headerTextContainer">
+                <div class="container headerTextContainer" style="padding: 0;">
+                    <h2>Hola {{username}}, estas son tus últimas ofertas:
+                    </h2>
                 </div>
             </div>
+        </div>
+    </div>
 
-            <div class="col-12 col-md-6 py-5" style="background-color: darkgray;">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12 col-md-7 py-5 d-flex justify-content-center">
+                <!--  container -->
+                <div class="container">
+
+                    @if (feedItems.length > 0) {
+                    <div class="row  align-items-stretch">
+                        @for (feedItem of feedItems; let even = $even; let odd = $odd; track feedItem) {
+                        <div
+                            class="col-lg-3 col-md-6 col-sm-6 d-flex justify-content-center align-items-center gy-3 test">
+                            <div class="card h-100 border rounded align-items-stretch feedCard  bg-light"
+                                style="object-fit: contain;">
+                                <img class="card-img img-fluid w-100" src="{{feedItems[$index].imagen}}"
+                                    alt="Card image cap" style="object-fit: contain;">
+                                <div class="card-body cpad">
+                                    <h5 class="card-title">{{feedItems[$index].nombre}}</h5>
+                                    <p class="card-text">{{feedItems[$index].descripcion}}</p>
+                                </div>
+                                <div class="card-body d-flex align-items-end">
+                                    <button class="btn btn-primary mx-1">Editar</button>
+                                    <button class="btn btn-primary mx-1">Eliminar</button>
+                                </div>
+                            </div>
+                        </div>
+                        }
+
+                        <div
+                            class="col-lg-3 col-md-6 col-sm-12 d-flex justify-content-center align-items-center gy-3 test">
+                            <div class="card h-100 border rounded align-items-stretch feedCard  bg-light"
+                                style="object-fit: contain;">
+                                <img class="card-img img-fluid w-100" src="{{logo}}" alt="Card image cap"
+                                    style="object-fit: contain;">
+                                <div class="card-body cpad">
+                                    <h5 class="card-title">Agrega una nueva Oferta!</h5>
+                                    <p class="card-text">Haz click sobre el botón para agregar una nueva oferta
+                                        o selecciona alguna de las otras ofertas</p>
+                                </div>
+                                <div class="card-body d-flex justify-content-center align-items-end">
+                                    <button class="btn btn-primary mx-1">Agregar!</button>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <br>
+                    <div class="pagination">
+                        <button class="btn-31" (click)="previousPage()" [disabled]="currentPage === 1">
+                            <span class="text-container">
+                                <span class="text">Anterior</span>
+                            </span>
+                        </button>
+
+                        <span>Página {{ currentPage }} de {{ totalPages }}</span>
+
+                        <button class="btn-31" (click)="nextPage()" [disabled]="currentPage === totalPages">
+                            <span class="text-container">
+                                <span class="text">Siguiente</span>
+                            </span>
+                        </button>
+                        <!-- <button (click)="test()">test</button> -->
+
+                    </div>
+                    } @else {
+                    <p>No hay resultados</p>
+                    }
+                    <br>
+                </div>
+                <!-- container -->
+            </div>
+
+            <div class="col-12 col-md-5 py-5 formContainer">
                 <p>Hola</p>
-                <!--  @switch (condition) {
+                 @switch (actionSelected) {
                     @case (1) {
-                    <app-insert-user></app-insert-user>
+                    <app-insert></app-insert>
                     }
                     @case (2) {
                     <div class="row justify-content-center py-5" style="background-color: darkgrey;">
@@ -35,19 +99,19 @@
                     </div>
                     }
                     @case (3) {
-                    <app-user-table></app-user-table>
+                    
                     }
                     @case (4) {
-                    <app-grupo-table></app-grupo-table>
-                    }
-                    @case(5){
-                        <app-insert-grupo></app-insert-grupo>
+                   
                     }
                     @default {
-                    Default case.
+                        <div class="container">
+                            <app-insert></app-insert>
+                        </div>
                     }
-                    } -->
+                    }
             </div>
+
         </div>
     </div>
 

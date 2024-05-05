@@ -21,10 +21,17 @@ export class DatabaseService {
     return this.http.get(url, { params });
   }
 
+  recibirEmployerOfertas(): Observable<any> {
+    const url = this.apiUrl + '/api/ofertasUser';
+    console.log('url:', url);
+    /*  return this.http.get('http://localhost:8000/viewUsers', { params }); */
+    return this.http.get(url);
+  }
+
   async checkAuthStatus(): Promise<boolean> {
     try {
       // Realizar una solicitud HTTP al backend para verificar el estado de autenticación del usuario
-      const response: any = await this.http.get<{ authenticated: boolean }>(`${this.apiUrl}/api/check-auth-status`,{ withCredentials: true }).toPromise();
+      const response: any = await this.http.get<{ authenticated: boolean }>(`${this.apiUrl}/api/check-auth-status`, { withCredentials: true }).toPromise();
       console.log('Respuesta del servidor:', response);
       return response;
     } catch (error) {
@@ -32,5 +39,30 @@ export class DatabaseService {
       return false;
     }
   }
+
+  async checkEmployer(page: number = 1, pageSize: number = 10): Promise<any> {
+    try {
+      // Realizar una solicitud HTTP al backend para obtener los datos del empleador
+      const response: any = await this.http.get<any>(`${this.apiUrl}/api/ofertasUser?page=${page}&pageSize=${pageSize}`, { withCredentials: true }).toPromise();
+      console.log('Respuesta del servidor:', response);
+      return response;
+    } catch (error) {
+      console.error('Error al verificar el empleador:', error);
+      throw error; // O maneja el error según lo necesites
+    }
+  }
+
+  async checkLogo(): Promise<any> {
+    try {
+      // Realizar una solicitud HTTP al backend para obtener los datos del anunciante
+      const response: any = await this.http.get<any>(`${this.apiUrl}/api/ofertasImg`, { withCredentials: true }).toPromise();
+      console.log('Respuesta del servidor checkLogo:', response);
+      return response;
+    } catch (error) {
+      console.error('Error al verificar el anunciante:', error);
+      throw error; // O maneja el error aquí lo necesites
+    }
+  }
+  
 
 }

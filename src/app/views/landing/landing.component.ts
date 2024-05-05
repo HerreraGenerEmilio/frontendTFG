@@ -16,7 +16,7 @@ export class LandingComponent {
   feedItems: any[] = [];
 
   public currentPage = 1;
-  public pageSize = 6;
+  public pageSize = 8;
   public totalPages = 1;
   public authenticated = false;
 
