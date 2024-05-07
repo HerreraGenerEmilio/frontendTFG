@@ -63,6 +63,32 @@ export class DatabaseService {
       throw error; // O maneja el error aquí lo necesites
     }
   }
+
+  async checkSectors(): Promise<any> {
+    try {
+      // Realizar una solicitud HTTP al backend para obtener los datos del anunciante
+      const response: any = await this.http.get<any>(`${this.apiUrl}/api/sectores`, { withCredentials: true }).toPromise();
+      console.log('Respuesta del servidor Sectores:', response);
+      return response;
+    } catch (error) {
+      console.error('Error al verificar el anunciante:', error);
+      throw error; // O maneja el error aquí lo necesites
+    }
+  }
+
+  async insertOffer(body: any): Promise<any> {
+    try {
+      // Realizar una solicitud HTTP al backend para enviar los datos de la oferta
+      console.log("body: ", body);
+      const response: any = await this.http.post<any>(`${this.apiUrl}/api/ofertas2`, body, { withCredentials: true }).toPromise();
+      console.log('Respuesta del servidor Insertar oferta:', response);
+      return response;
+    } catch (error) {
+      console.error('Error al insertar la oferta:', error);
+      throw error;
+    }
+}
+
   
 
 }

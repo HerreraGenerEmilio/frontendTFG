@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Renderer2, OnInit, HostListener } from '@angular/core';
 import { DatabaseService } from '../../services/database.service';
 import { HttpClientModule } from '@angular/common/http';
 import { Router } from '@angular/router';
@@ -13,7 +13,7 @@ import { InsertComponent } from '../../components/insert/insert.component';
 })
 export class CompanyComponent {
   
-  constructor(private obtainDataService: DatabaseService, private router: Router) { }
+  constructor(private obtainDataService: DatabaseService, private router: Router, private renderer: Renderer2) { }
 
   feedItems: any[] = [];
 
@@ -24,7 +24,7 @@ export class CompanyComponent {
   public username = '';
   public logo = '';
   public userId = 0;
-
+  public sectors: any[] = [];
   public actionSelected = 0;
 
   async ngOnInit() {
@@ -66,6 +66,20 @@ export class CompanyComponent {
     }
   }
 
+  async fetchSectores(): Promise<void> {
+    try {
+      const response: any | undefined = await this.obtainDataService.checkSectors();
+      if (response !== undefined) {
+        console.log('Respuesta fetchSectores:', response);
+        this.sectors = response;
+      } else {
+        console.log('No hay respuesta');
+      }
+    } catch (error) {
+      console.error('Error al recibir los datos:', error);
+    }
+  }
+
   onPageChange(page: number): void {
     this.currentPage = page;
     console.log('Current page:', this.currentPage);
@@ -89,6 +103,7 @@ export class CompanyComponent {
   test(): void {
     this.fetchOfertas(this.currentPage, this.pageSize);
     this.fetchLogo();
+    this.fetchSectores();
   }
 
   selectAction(action: number): void {
@@ -101,7 +116,12 @@ export class CompanyComponent {
   }
 
   scrollToTop() {
-    window.scrollTo({ top: 0, behavior: 'smooth' }); // Esto desplazará la página suavemente hacia arriba
+    const screenWidth = window.innerWidth;
+
+    if (screenWidth > 768) { // 768px es el ancho típico de las pantallas pequeñas (tablets y dispositivos móviles)
+    // Ejecuta tu función aquí
+    window.scrollTo({ top: 0, behavior: 'auto' }); // O la función que desees ejecutar
+  }
   }
 
 }
