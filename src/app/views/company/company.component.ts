@@ -23,6 +23,7 @@ export class CompanyComponent {
   public authenticated = false;
   public username = '';
   public logo = '';
+  public userId = 0;
 
   public actionSelected = 0;
 
@@ -38,6 +39,7 @@ export class CompanyComponent {
         /*  this.users = response.users;
          this.totalPages = response.lastPage; */
         this.username = response.username;
+        this.userId = response.userId;
         this.feedItems = response.ofertas.data;
         this.totalPages = response.ofertas.last_page;
         console.log('feedItems:', this.feedItems);
@@ -88,4 +90,18 @@ export class CompanyComponent {
     this.fetchOfertas(this.currentPage, this.pageSize);
     this.fetchLogo();
   }
+
+  selectAction(action: number): void {
+    this.actionSelected = action;
+    console.log('actionSelected:', this.actionSelected);
+    console.log('userId:', this.userId);
+    console.log('logo: ', this.logo);
+
+    this.scrollToTop();
+  }
+
+  scrollToTop() {
+    window.scrollTo({ top: 0, behavior: 'smooth' }); // Esto desplazará la página suavemente hacia arriba
+  }
+
 }

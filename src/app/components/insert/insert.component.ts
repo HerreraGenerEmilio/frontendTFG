@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 
 
@@ -11,26 +11,38 @@ import { FormBuilder, FormControl, FormGroup, Validators, ReactiveFormsModule } 
 })
 export class InsertComponent {
 
-  myForm: FormGroup;
-  id = 1;
+  myForm!: FormGroup;
+  @Input() id = 2000;
+  @Input() imagen = '';
+
   constructor(private formBuilder: FormBuilder) {
-    this.myForm = this.formBuilder.group({
-      nombre: ['', Validators.required],
-      descripcion: ['', Validators.required],
-      imagen: ['', Validators.required],
-      publicador: [this.id],
-      sector: ['', Validators.required]
-    });
+   
   }
 
 
   ngOnInit(): void {
+    console.log("userID:", this.id);
+    console.log("logo: ", this.imagen);
+
+    this.myForm = this.formBuilder.group({
+      nombre: ['', Validators.required],
+      descripcion: ['', Validators.required],
+      imagen: [this.imagen],
+      publicador: [this.id],
+      sector: ['', Validators.required]
+    });
+    
   }
 
   onSubmit() {
     if (this.myForm.valid) {
       // Form is valid, submit data
       console.log(this.myForm.value);
+
+      // TODO: Submit data to server
+      
+
+
     } else {
       // Form is invalid, display error messages
       console.log('Form is invalid');
