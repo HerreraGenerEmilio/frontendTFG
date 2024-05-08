@@ -1,21 +1,27 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, input } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { DatabaseService } from '../../services/database.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Component({
-  selector: 'app-insert',
+  selector: 'app-update',
   standalone: true,
   imports: [ReactiveFormsModule],
-  templateUrl: './insert.component.html',
-  styleUrl: './insert.component.css'
+  templateUrl: './update.component.html',
+  styleUrl: './update.component.css'
 })
-export class InsertComponent {
+export class UpdateComponent {
 
   myForm!: FormGroup;
   @Input() id = 2000;
   @Input() imagen = '';
   @Input() sectores: any[] = [];
+  @Input() oferta = 70000000;
+  @Input() nombre = '';
+  @Input() descripcion = '';
+  @Input() sector = '';
+  @Input() ofertArray: any= [];
+
   apiUrl = 'http://localhost:8000';
 
   constructor(private formBuilder: FormBuilder,
@@ -24,18 +30,17 @@ export class InsertComponent {
   }
 
   ngOnInit(): void {
-    console.log("sectores recibididos OnInit:", this.sectores);
-
+    console.log("ofertas recibidas OnInit:", this.ofertArray);
+    
     this.myForm = this.formBuilder.group({
-      nombre: ['', Validators.required],
-      descripcion: ['', Validators.required],
+      id: [this.ofertArray.id],
+      nombre: [this.ofertArray.nombre, Validators.required],
+      descripcion: [this.ofertArray.descripcion, Validators.required],
       imagen: [this.imagen],
-      publicador: [this.id],
-      sector: ['', Validators.required]
+      publicador: [this.ofertArray.publicador],
+      sector: [this.ofertArray.sector, Validators.required]
     });
 
-    /* let test = this.getCsrfToken();
-    console.log("token:", test); */
   }
 
   onSubmit() {
@@ -43,7 +48,7 @@ export class InsertComponent {
       // Form is valid, submit data
       console.log(this.myForm.value);
       // Enviar directamente los datos del formulario sin envolverlos en un objeto adicional
-      this.http.post<any>('http://localhost:8000/api/ofertas2', this.myForm.value).subscribe(() => {
+      this.http.put<any>('http://localhost:8000/api/ofertas', this.myForm.value).subscribe(() => {
         // refrescar pagina?
       });
     } else {

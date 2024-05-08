@@ -3,11 +3,12 @@ import { DatabaseService } from '../../services/database.service';
 import { HttpClientModule } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { InsertComponent } from '../../components/insert/insert.component';
+import { UpdateComponent } from '../../components/update/update.component';
 
 @Component({
   selector: 'app-company',
   standalone: true,
-  imports: [InsertComponent],
+  imports: [InsertComponent, UpdateComponent],
   templateUrl: './company.component.html',
   styleUrl: './company.component.css'
 })
@@ -26,7 +27,8 @@ export class CompanyComponent {
   public userId = 0;
   public sectors: any[] = [];
   public actionSelected = 0;
-
+  public offerId = 0;
+  public ofertArray: any ='';
   async ngOnInit() {
     this.test();
   }
@@ -106,13 +108,28 @@ export class CompanyComponent {
     this.fetchSectores();
   }
 
-  selectAction(action: number): void {
+  selectAction(action: number, idOffer?: number): void {
     this.actionSelected = action;
     console.log('actionSelected:', this.actionSelected);
     console.log('userId:', this.userId);
     console.log('logo: ', this.logo);
-
+    
+    if (idOffer !== undefined) {
+      this.offerId = idOffer;
+      console.log('offerId:', this.offerId);
+    }
+  
     this.scrollToTop();
+  }
+
+  editOffer(offerId: number) {
+    this.feedItems.forEach(element => {
+      if (element.id === offerId) {
+        console.log('elemento: ', element);
+        this.ofertArray = element;
+        this.actionSelected = 2;
+      }
+    });
   }
 
   scrollToTop() {
