@@ -4,6 +4,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { InsertComponent } from '../../components/insert/insert.component';
 import { UpdateComponent } from '../../components/update/update.component';
+import { timeout } from 'rxjs';
 
 @Component({
   selector: 'app-company',
@@ -13,7 +14,7 @@ import { UpdateComponent } from '../../components/update/update.component';
   styleUrl: './company.component.css'
 })
 export class CompanyComponent {
-  
+
   constructor(private obtainDataService: DatabaseService, private router: Router, private renderer: Renderer2) { }
 
   feedItems: any[] = [];
@@ -28,7 +29,8 @@ export class CompanyComponent {
   public sectors: any[] = [];
   public actionSelected = 0;
   public offerId = 0;
-  public ofertArray: any ='';
+  public ofertArray: any = '';
+  public alreadySelected = false;
   async ngOnInit() {
     this.test();
   }
@@ -113,13 +115,14 @@ export class CompanyComponent {
     console.log('actionSelected:', this.actionSelected);
     console.log('userId:', this.userId);
     console.log('logo: ', this.logo);
-    
+
     if (idOffer !== undefined) {
       this.offerId = idOffer;
       console.log('offerId:', this.offerId);
     }
-  
+
     this.scrollToTop();
+
   }
 
   editOffer(offerId: number) {
@@ -130,15 +133,24 @@ export class CompanyComponent {
         this.actionSelected = 2;
       }
     });
+
+    if (this.alreadySelected === true) {
+      this.actionSelected = 3;
+      setTimeout(() => {
+        //para que recargue el componente
+        this.actionSelected = 2;
+      }, 1);
+    }
+
+    this.alreadySelected = true;
   }
 
   scrollToTop() {
     const screenWidth = window.innerWidth;
 
     if (screenWidth > 768) { // 768px es el ancho típico de las pantallas pequeñas (tablets y dispositivos móviles)
-    // Ejecuta tu función aquí
-    window.scrollTo({ top: 0, behavior: 'auto' }); // O la función que desees ejecutar
+      // Ejecuta tu función aquí
+      window.scrollTo({ top: 0, behavior: 'auto' }); // O la función que desees ejecutar
+    }
   }
-  }
-
 }
