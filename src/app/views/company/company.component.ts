@@ -1,21 +1,22 @@
 import { Component, Renderer2, OnInit, HostListener } from '@angular/core';
 import { DatabaseService } from '../../services/database.service';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { InsertComponent } from '../../components/insert/insert.component';
 import { UpdateComponent } from '../../components/update/update.component';
 import { timeout } from 'rxjs';
+import { DetailComponent } from '../../components/detail/detail.component';
 
 @Component({
   selector: 'app-company',
   standalone: true,
-  imports: [InsertComponent, UpdateComponent],
+  imports: [InsertComponent, UpdateComponent, DetailComponent],
   templateUrl: './company.component.html',
   styleUrl: './company.component.css'
 })
 export class CompanyComponent {
 
-  constructor(private obtainDataService: DatabaseService, private router: Router, private renderer: Renderer2) { }
+  constructor(private obtainDataService: DatabaseService, private router: Router, private renderer: Renderer2, private http: HttpClient) { }
 
   feedItems: any[] = [];
 
@@ -31,6 +32,7 @@ export class CompanyComponent {
   public offerId = 0;
   public ofertArray: any = '';
   public alreadySelected = false;
+  public alreadyViewing = false;
   async ngOnInit() {
     this.test();
   }
@@ -145,6 +147,26 @@ export class CompanyComponent {
     this.alreadySelected = true;
   }
 
+  viewOffer(offerId: number) {
+    this.feedItems.forEach(element => {
+      if (element.id === offerId) {
+        console.log('elemento: ', element);
+        this.ofertArray = element;
+        this.actionSelected = 4;
+      }
+    });
+
+    if (this.alreadyViewing === true) {
+      this.actionSelected = 3;
+      setTimeout(() => {
+        //para que recargue el componente
+        this.actionSelected = 4;
+      }, 1);
+    }
+
+    this.alreadyViewing = true;
+  }
+
   scrollToTop() {
     const screenWidth = window.innerWidth;
 
@@ -152,5 +174,13 @@ export class CompanyComponent {
       // Ejecuta tu función aquí
       window.scrollTo({ top: 0, behavior: 'auto' }); // O la función que desees ejecutar
     }
+  }
+
+  deleteOffer(id: number) {
+    console.log('id:', id);
+    
+    this.http.delete<any>(`http://localhost:8000/api/ofertas/${id}`).subscribe(() => {
+        // refrescar pagina?
+      });
   }
 }
