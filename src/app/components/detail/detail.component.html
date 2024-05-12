@@ -1,9 +1,42 @@
-<p>detail works!</p>
+
 @if (ofertArray) {
-    <p>{{ofertArray.id}}</p>   
-    <p>{{ofertArray.nombre}}</p>
-    <p>{{ofertArray.descripcion}}</p>
-    <p>{{ofertArray.imagen}}</p>
-    <p>{{ofertArray.publicador}}</p>
-    <p>{{ofertArray.sector}}</p>
+<div class="card mb-3">
+    <div class="row g-0">
+      <div class="col-md-4">
+        <img src={{ofertArray.imagen}} class="img-fluid rounded-start" alt="...">
+      </div>
+      <div class="col-md-8">
+        <div class="card-body">
+            <div class="card-body">
+                <h3 class="card-title">Nombre de la oferta: </h3>
+                <p class="card-text">{{ofertArray.nombre}}</p>
+            </div>
+            <div class="card-body">
+                <h3 class="card-title">Descripción del puesto trabajo y condiciones: </h3>
+                <p class="card-text">{{ofertArray.descripcion}}</p>
+            </div>
+            <div class="row">
+                <div class=" col-12 col-md-6">
+                    <div class="card-body">
+                        <h3 class="card-title">Sector: </h3>
+                        <p class="card-text">{{nombreSector}}</p>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6">
+                    <div class="card-body">
+                        <h3 class="card-title">Suscriptores: </h3>
+                        <p class="card-text">funcionalidad en construcción</p>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                <p class="card-text"><small class="text-muted">oferta creada el: {{fechActualizacion}} por {{nombrePublicador}}</small></p>
+            </div>
+            <div class="card-body">
+                <p class="card-text"><small class="text-muted">última actualización: {{fechActualizacion}}</small></p>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
 }
