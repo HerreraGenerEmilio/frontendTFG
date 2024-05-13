@@ -3,17 +3,22 @@
 
     <div class="row d-flex justify-content-center">
         <div class="col-11 d-flex justify-content-center">
-            <div class="row">
-                <div class="col-12 d-flex justify-content-start">
+            <div class="row d-flex justify-content-center">
+                <div class="col-10 d-flex justify-content-start">
                     <div class="container headerTextContainer" style="padding: 0; text-align: left; margin-left: 0%;">
+                        @if (contacted==false) {
                         <h2>Rellena el formulario y nos pondremos en contacto contigo</h2>
+                        } @else {
+                        <h2>Formulario de contacto enviado!</h2>
+                        }
                     </div>
                 </div>
-                <div class="col-12">
+                <div class="col-10">
+                    @if (contacted==false) {
                     <div class="card" style="width: 100%; margin-bottom: 2vh;">
-                        <div class="card-body d-flex justify-content-center">
+                        <div class="card-body d-flex justify-content-center" style="background-color: #efefef;">
 
-                            <div class="row">
+                            <div class="row" style="width: 90%;">
                                 <form class="form" [formGroup]="myForm" (ngSubmit)="onSubmit()">
 
                                     <div class="col-12 my-3">
@@ -77,13 +82,13 @@
                                             <div class="col-12 d-flex justify-content-end">
                                                 <!--  <span class="info-adicional" style="font-weight: lighter;">Elige el sector :</span> -->
                                                 <select class="formInputs" id="motivo" formControlName="motivo"
-                                                    style="width: 100%;">
+                                                    style="width: 100%; color: black;">
                                                     @for (sector of sectores; track sector) {
-                                                    <option value="{{sector.id}}">{{sector.nombre}}</option>
+                                                    <option value={{sector}}>{{sector}}</option>
                                                     }
                                                     <!-- Agrega más opciones según sea necesario -->
                                                 </select>
-                                            </div> 
+                                            </div>
 
                                         </div>
                                         <!-- Add validation messages here if needed -->
@@ -95,16 +100,10 @@
                                                     style="margin-bottom: auto; font-weight: bolder; color: black;">Mensaje:</label>
                                             </div>
                                             <div class="col-12 d-flex align-items-start justify-content-end">
-                                                <textarea class="formInputs" id="mensaje"
-                                                    formControlName="mensaje"
+                                                <textarea class="formInputs" id="mensaje" formControlName="mensaje"
                                                     style="width: 100%; min-height: 15vh; margin-top: auto;"></textarea>
                                             </div>
                                         </div>
-                                        <!-- Add validation messages here if needed -->
-                                    </div>
-                                    <div class="col-12 my-3" [hidden]="true">
-                                        <label for="publicador">Publicador:</label>
-                                        <input type="number" id="publicador" formControlName="publicador" hidden>
                                         <!-- Add validation messages here if needed -->
                                     </div>
                                     <div class="col-12 d-flex justify-content-end">
@@ -117,6 +116,19 @@
                             </div>
                         </div>
                     </div>
+                    } @else {
+                    <div class="card d-flex justify-content-center" style="width: auto; margin-bottom: 2vh;">
+                        <div class="card d-flex justify-content-center">
+                            <img src="../../../assets/imgs/landing/coworlogo.png" class="card-img-top" alt="...">
+                            <div class="card-body">
+                              <h5 class="card-title">¡Gracias por ponerte en contacto con nosotros!</h5>
+                              <p class="card-text">Hemos recibido tu formulario de contacto correctamente. <br> Nuestro equipo revisará tu solicitud y en breve nos pondremos en contacto contigo para dar solución a tu petición de la manera más rápida y efectiva posible.<br></p>
+                              <a href="/" class="btn btn-success" style="background-color: #18E71E;"> <span style="font-weight: bolder;">¡Volver a Jobhub!</span></a>
+                            </div>
+                          </div>
+                    </div>
+                    }
+
                 </div>
             </div>
 

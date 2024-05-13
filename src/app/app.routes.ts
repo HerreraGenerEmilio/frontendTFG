@@ -23,6 +23,7 @@ export const routes: Routes = [
   { path: '', redirectTo: 'landing', pathMatch: 'full' },
   { path: 'home', pathMatch: 'full', component: HomeComponent, canActivate: [AuthGuard]},
   { path: 'test', redirectTo: 'company', pathMatch: 'full' },
+  { path: 'landing', redirectTo: 'landing', pathMatch: 'full' },
   //{ path: '**', redirectTo: 'home' },
   { path: 'contact', component: ContactComponent},
   { path: 'legal', component: LegalComponent},

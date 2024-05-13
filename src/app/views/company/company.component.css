@@ -434,3 +434,7 @@ main.container-fluid {
   fill: black;
   transform: rotate(180deg);
 }
+
+.add:hover{
+  transform: scale(1.1); /* Aumenta el tamaño */
+}

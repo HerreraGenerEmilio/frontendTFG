@@ -3,6 +3,7 @@ import { FormBuilder, FormControl, FormGroup, Validators, ReactiveFormsModule } 
 import { DatabaseService } from '../../services/database.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
+
 @Component({
   selector: 'app-contact',
   standalone: true,
@@ -13,14 +14,19 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 export class ContactComponent {
 
   myForm!: FormGroup;
-  @Input() id = 2000;
-  @Input() imagen = '';
-  @Input() sectores: any[] = [];
-  apiUrl = 'http://localhost:8000';
+  sectores:string[] = [
+    "Dar de alta empresa",
+    "Consulta empleador",
+    "Consulta buscador de empleo",
+    "Trabajar con nosotros",
+    "Denunciar robo de identidad",
+    "Otros"
+  ];
+  contacted:boolean = false;
+
 
   constructor(private formBuilder: FormBuilder,
     private obtainDataService: DatabaseService, private http: HttpClient) {
-
   }
 
   ngOnInit(): void {
@@ -28,10 +34,11 @@ export class ContactComponent {
 
     this.myForm = this.formBuilder.group({
       nombre: ['', Validators.required],
-      descripcion: ['', Validators.required],
-      imagen: [this.imagen],
-      publicador: [this.id],
-      sector: ['', Validators.required]
+      apellido: ['', Validators.required],
+      email: ['', Validators.required],
+      asunto: ['', Validators.required],
+      motivo: ['', Validators.required],
+      mensaje: ['', Validators.required]
     });
 
     /* let test = this.getCsrfToken();
@@ -43,8 +50,8 @@ export class ContactComponent {
       // Form is valid, submit data
       console.log(this.myForm.value);
       // Enviar directamente los datos del formulario sin envolverlos en un objeto adicional
-      this.http.post<any>('http://localhost:8000/api/ofertas2', this.myForm.value).subscribe(() => {
-        // refrescar pagina?
+      this.http.post<any>('http://localhost:8000/api/contacto', this.myForm.value).subscribe(() => {
+        this.contacted = true;
       });
     } else {
       // Form is invalid, display error messages
