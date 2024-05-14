@@ -49,7 +49,6 @@ export class ContactComponent {
     if (this.myForm.valid) {
       // Form is valid, submit data
       console.log(this.myForm.value);
-      // Enviar directamente los datos del formulario sin envolverlos en un objeto adicional
       this.http.post<any>('http://localhost:8000/api/contacto', this.myForm.value).subscribe(() => {
         this.contacted = true;
       });
