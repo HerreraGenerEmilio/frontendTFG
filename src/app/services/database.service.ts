@@ -28,7 +28,7 @@ export class DatabaseService {
     return this.http.get(url);
   }
 
-  async checkAuthStatus(): Promise<boolean> {
+  async checkAuthStatus(): Promise<any> {
     try {
       // Realizar una solicitud HTTP al backend para verificar el estado de autenticación del usuario
       const response: any = await this.http.get<{ authenticated: boolean }>(`${this.apiUrl}/api/check-auth-status`, { withCredentials: true }).toPromise();
