@@ -38,8 +38,9 @@ export class LandingComponent {
   async ngOnInit() {
     this.test();
     let logged = await this.obtainDataService.checkAuthStatus()
-    console.log('respuesta servidor', logged);
-    if (logged == true) {
+    console.log('respuesta servidor HOLA', logged);
+    if (logged.authenticated == true) {
+      console.log("???")
       this.router.navigate(['/home']);
     }
   }

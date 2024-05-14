@@ -43,8 +43,9 @@ export class InsertComponent {
       // Form is valid, submit data
       console.log(this.myForm.value);
       // Enviar directamente los datos del formulario sin envolverlos en un objeto adicional
-      this.http.post<any>('http://localhost:8000/api/ofertas2', this.myForm.value).subscribe(() => {
+      this.http.post<any>('http://localhost:8000/api/ofertas', this.myForm.value).subscribe(() => {
         // refrescar pagina?
+        window.location.reload();
       });
     } else {
       // Form is invalid, display error messages
