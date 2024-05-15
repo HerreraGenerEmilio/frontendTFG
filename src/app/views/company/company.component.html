@@ -81,7 +81,7 @@
                         }
 
                         <div
-                        class="col-6 col-lg-3 col-md-6 col-sm-6 d-flex justify-content-center align-items-center gy-3 test ">
+                            class="col-6 col-lg-3 col-md-6 col-sm-6 d-flex justify-content-center align-items-center gy-3 test ">
                             <div class="card h-100 border rounded align-items-stretch feedCard  bg-light add"
                                 style="object-fit: contain;">
                                 <img class="card-img img-fluid w-100" src="{{logo}}" alt="Card image cap"
@@ -155,6 +155,12 @@
                 <p style="display: none;">a</p>
                 }
                 @case (4) {
+                <app-detail [ofertArray]="ofertArray"></app-detail>
+                }
+                @case (5) {
+                <app-detail [ofertArray]="ofertArray"></app-detail>
+                }
+                @case (6) {
                 <app-detail [ofertArray]="ofertArray"></app-detail>
                 }
                 @default {

@@ -26,12 +26,12 @@ export class AdminGuard implements CanActivate {
         return false; // El usuario está autenticado, permite la navegación
       } else {
         console.log('Usuario no autenticado:', response);
-        //window.location.href = 'http://localhost:8000/login';
+        window.location.href = 'http://localhost:8000/login';
         return false;
       }
     } catch (error) {
       console.error('Error al verificar la autenticación:', error);
-      //window.location.href = 'http://localhost:8000/login';
+      window.location.href = 'http://localhost:8000/login';
       return false;
     }
   }
