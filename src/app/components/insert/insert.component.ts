@@ -45,8 +45,6 @@ export class InsertComponent {
   onSubmit() {
     if (this.myForm.valid) {
       // Form is valid, submit data
-      console.log("aaaaa", this.myForm.value);
-      // Enviar directamente los datos del formulario sin envolverlos en un objeto adicional
       this.http.post<any>('http://localhost:8000/api/ofertas', this.myForm.value).subscribe(() => {
         this.sectores.forEach(element => {
           console.log("Par :" ,element.id, this.myForm.value.sector);
