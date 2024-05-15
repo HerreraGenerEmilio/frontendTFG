@@ -50,7 +50,6 @@ export class InsertComponent {
           console.log("Par :" ,element.id, this.myForm.value.sector);
           if (element.id == this.myForm.value.sector) {
             this.img = element.logo;
-            console.log("SOCORRO FUNCIONA", element);
           }
         });
         
