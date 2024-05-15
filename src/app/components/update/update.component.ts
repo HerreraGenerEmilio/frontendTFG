@@ -2,11 +2,12 @@ import { Component, Input, OnInit, input } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { DatabaseService } from '../../services/database.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { SuccessComponent } from '../success/success.component';
 
 @Component({
   selector: 'app-update',
   standalone: true,
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, SuccessComponent],
   templateUrl: './update.component.html',
   styleUrl: './update.component.css'
 })
@@ -21,8 +22,11 @@ export class UpdateComponent {
   @Input() descripcion = '';
   @Input() sector = '';
   @Input() ofertArray: any= [];
+  @Input() img = '';
+  @Input() type = 'update';
 
   apiUrl = 'http://localhost:8000';
+  success = 0;
 
   constructor(private formBuilder: FormBuilder,
     private obtainDataService: DatabaseService, private http: HttpClient) {
@@ -41,6 +45,8 @@ export class UpdateComponent {
       sector: [this.ofertArray.sector, Validators.required]
     });
 
+    this.img = this.ofertArray.imagen;
+    console.log("imagen:", this.img);
   }
 
   onSubmit() {
@@ -50,6 +56,7 @@ export class UpdateComponent {
       // Enviar directamente los datos del formulario sin envolverlos en un objeto adicional
       this.http.put<any>('http://localhost:8000/api/ofertas', this.myForm.value).subscribe(() => {
         // refrescar pagina?
+        this.success = 1;
       });
     } else {
       // Form is invalid, display error messages

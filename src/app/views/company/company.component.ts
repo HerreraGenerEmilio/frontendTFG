@@ -6,11 +6,12 @@ import { InsertComponent } from '../../components/insert/insert.component';
 import { UpdateComponent } from '../../components/update/update.component';
 import { timeout } from 'rxjs';
 import { DetailComponent } from '../../components/detail/detail.component';
+import { SuccessComponent } from '../../components/success/success.component';
 
 @Component({
   selector: 'app-company',
   standalone: true,
-  imports: [InsertComponent, UpdateComponent, DetailComponent],
+  imports: [InsertComponent, UpdateComponent, DetailComponent, SuccessComponent],
   templateUrl: './company.component.html',
   styleUrl: './company.component.css'
 })
@@ -33,6 +34,9 @@ export class CompanyComponent {
   public ofertArray: any = '';
   public alreadySelected = false;
   public alreadyViewing = false;
+  success = 0;
+  type = 'delete';
+
   async ngOnInit() {
     this.test();
   }
@@ -180,7 +184,12 @@ export class CompanyComponent {
     console.log('id:', id);
     
     this.http.delete<any>(`http://localhost:8000/api/ofertas/${id}`).subscribe(() => {
-        // refrescar pagina?
+        this.success = 1;
+        this.actionSelected = 5;
+        setTimeout(() => {
+          //para que recargue el componente
+        window.location.reload();
+        }, 1500);
       });
   }
 }

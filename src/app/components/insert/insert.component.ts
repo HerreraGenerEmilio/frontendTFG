@@ -19,6 +19,8 @@ export class InsertComponent {
   @Input() sectores: any[] = [];
   apiUrl = 'http://localhost:8000';
   success = 0;
+  @Input() img = '';
+  @Input() type = 'insert';
 
   constructor(private formBuilder: FormBuilder,
     private obtainDataService: DatabaseService, private http: HttpClient) {
@@ -43,9 +45,17 @@ export class InsertComponent {
   onSubmit() {
     if (this.myForm.valid) {
       // Form is valid, submit data
-      console.log(this.myForm.value);
+      console.log("aaaaa", this.myForm.value);
       // Enviar directamente los datos del formulario sin envolverlos en un objeto adicional
       this.http.post<any>('http://localhost:8000/api/ofertas', this.myForm.value).subscribe(() => {
+        this.sectores.forEach(element => {
+          console.log("Par :" ,element.id, this.myForm.value.sector);
+          if (element.id == this.myForm.value.sector) {
+            this.img = element.logo;
+            console.log("SOCORRO FUNCIONA", element);
+          }
+        });
+        
         this.success = 1;
       });
     } else {
