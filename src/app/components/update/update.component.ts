@@ -57,6 +57,10 @@ export class UpdateComponent {
       this.http.put<any>('http://localhost:8000/api/ofertas', this.myForm.value).subscribe(() => {
         // refrescar pagina?
         this.success = 1;
+        setTimeout(() => {
+          //para que recargue el componente
+        window.location.reload();
+        }, 1500);
       });
     } else {
       // Form is invalid, display error messages
