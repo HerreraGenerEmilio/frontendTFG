@@ -54,6 +54,10 @@ export class InsertComponent {
         });
         
         this.success = 1;
+        setTimeout(() => {
+          //para que recargue el componente
+        window.location.reload();
+        }, 1500);
       });
     } else {
       // Form is invalid, display error messages
